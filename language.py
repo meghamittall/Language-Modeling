@@ -45,7 +45,13 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def buildVocabulary(corpus):
-    return
+    unique_unigrams_lst =[]
+    for i in range(len(corpus)):
+        for j in range(len(corpus[i])):
+            if corpus[i][j] not in unique_unigrams_lst:
+                unique_unigrams_lst.append(corpus[i][j])
+    # print(unique_unigrams_lst)
+    return unique_unigrams_lst
 
 
 '''
@@ -297,7 +303,7 @@ if __name__ == "__main__":
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
-    test.testGetCorpusLength()
+    test.testBuildVocabulary()
 
     ## Uncomment these for Week 2 ##
 """
