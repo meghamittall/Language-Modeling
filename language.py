@@ -93,7 +93,13 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to ints
 '''
 def countStartWords(corpus):
-    return
+    start_words_count_dict = {}
+    for i in range(len(corpus)):
+        if corpus[i][0] not in start_words_count_dict:
+            start_words_count_dict[corpus[i][0]]=0
+        start_words_count_dict[corpus[i][0]]+=1
+    # print(start_words_count_dict)
+    return start_words_count_dict
 
 
 '''
@@ -315,7 +321,7 @@ if __name__ == "__main__":
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
-    test.testGetStartWords()
+    test.testCountStartWords()
 
     ## Uncomment these for Week 2 ##
 """
