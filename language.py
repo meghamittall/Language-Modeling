@@ -17,8 +17,15 @@ Parameters: str
 Returns: 2D list of strs
 '''
 def loadBook(filename):
-    return
-
+    file = open(filename, "r")
+    words_lst = []
+    for line in file:
+        if len(line) > 1:
+            line = line.strip()
+            wordString = line.split()
+            words_lst.append(wordString)
+    file.close()
+    return words_lst
 
 '''
 getCorpusLength(corpus)
@@ -27,7 +34,8 @@ Parameters: 2D list of strs
 Returns: int
 '''
 def getCorpusLength(corpus):
-    return
+    corpus_length = sum(len(row) for row in corpus)
+    return corpus_length
 
 
 '''
@@ -37,7 +45,13 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def buildVocabulary(corpus):
-    return
+    unique_unigrams_lst =[]
+    for i in range(len(corpus)):
+        for j in range(len(corpus[i])):
+            if corpus[i][j] not in unique_unigrams_lst:
+                unique_unigrams_lst.append(corpus[i][j])
+    # print(unique_unigrams_lst)
+    return unique_unigrams_lst
 
 
 '''
@@ -47,7 +61,14 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to ints
 '''
 def countUnigrams(corpus):
-    return
+    unigrams_count_dict = {}
+    for i in range(len(corpus)):
+        for j in range(len(corpus[i])):
+            if corpus[i][j] not in unigrams_count_dict:
+                unigrams_count_dict[corpus[i][j]] = 0
+            unigrams_count_dict[corpus[i][j]] += 1
+    # print(unigrams_count_dict)
+    return unigrams_count_dict
 
 
 '''
@@ -57,7 +78,12 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def getStartWords(corpus):
-    return
+    start_words_lst = []
+    for i in range(len(corpus)):
+        if corpus[i][0] not in start_words_lst:
+            start_words_lst.append(corpus[i][0])
+    # print(start_words_lst) 
+    return start_words_lst
 
 
 '''
@@ -67,7 +93,13 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to ints
 '''
 def countStartWords(corpus):
-    return
+    start_words_count_dict = {}
+    for i in range(len(corpus)):
+        if corpus[i][0] not in start_words_count_dict:
+            start_words_count_dict[corpus[i][0]]=0
+        start_words_count_dict[corpus[i][0]]+=1
+    # print(start_words_count_dict)
+    return start_words_count_dict
 
 
 '''
@@ -285,10 +317,11 @@ def scatterPlot(xs, ys, labels, title):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
-    test.week1Tests()
-    print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek1()
+    # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
+    # test.week1Tests()
+    # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek1()
+    test.testCountStartWords()
 
     ## Uncomment these for Week 2 ##
 """
