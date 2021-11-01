@@ -17,8 +17,15 @@ Parameters: str
 Returns: 2D list of strs
 '''
 def loadBook(filename):
-    return
-
+    file = open(filename, "r")
+    words_lst = []
+    for line in file:
+        if len(line) > 1:
+            line = line.strip()
+            wordString = line.split()
+            words_lst.append(wordString)
+    file.close()
+    return words_lst
 
 '''
 getCorpusLength(corpus)
@@ -27,7 +34,8 @@ Parameters: 2D list of strs
 Returns: int
 '''
 def getCorpusLength(corpus):
-    return
+    corpus_length = sum(len(row) for row in corpus)
+    return corpus_length
 
 
 '''
@@ -37,6 +45,7 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def buildVocabulary(corpus):
+    
     return
 
 
@@ -285,10 +294,11 @@ def scatterPlot(xs, ys, labels, title):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
-    test.week1Tests()
-    print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek1()
+    # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
+    # test.week1Tests()
+    # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek1()
+    test.testGetCorpusLength()
 
     ## Uncomment these for Week 2 ##
 """
