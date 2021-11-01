@@ -78,7 +78,12 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def getStartWords(corpus):
-    return
+    start_words_lst = []
+    for i in range(len(corpus)):
+        if corpus[i][0] not in start_words_lst:
+            start_words_lst.append(corpus[i][0])
+    # print(start_words_lst) 
+    return start_words_lst
 
 
 '''
@@ -310,7 +315,7 @@ if __name__ == "__main__":
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
-    test.testCountUnigrams()
+    test.testGetStartWords()
 
     ## Uncomment these for Week 2 ##
 """
