@@ -212,10 +212,9 @@ def generateTextFromUnigrams(count, words, probs):
     for x in range(count):
         lst = choices(words, weights=probs)
         words_list.append(lst[0])
-    sentence=""
-    for word in 
-    print(sentence)
-    return sentence
+    sentence=" "
+    # print(sentence.join(words_list))
+    return (sentence.join(words_list))
 
 
 '''
