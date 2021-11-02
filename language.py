@@ -133,8 +133,8 @@ Returns: list of floats
 def buildUniformProbs(unigrams):
     uniform_prob_lst=[]
     for i in range(len(unigrams)):
-        unigrams[i]=1/len(unigrams)
-        uniform_prob_lst.append(unigrams[i])
+        w=1/len(unigrams)
+        uniform_prob_lst.append(w)
     # print(uniform_prob_lst)
     return uniform_prob_lst
 
@@ -208,13 +208,17 @@ Returns: str
 '''
 from random import choices
 def generateTextFromUnigrams(count, words, probs):
-    words_list=[]
+    # words_list=[]
+    sentence=" "
     for x in range(count):
         lst = choices(words, weights=probs)
-        words_list.append(lst[0])
-    sentence=" "
+        
+        sentence+=lst[0]+" "
+        # print(lst[0])
+    #  words_list.append(lst[0])
+    # sentence=" "
     # print(sentence.join(words_list))
-    return (sentence.join(words_list))
+    return sentence
 
 
 '''
@@ -258,7 +262,13 @@ Parameters: 2D list of strs
 Returns: None
 '''
 def graphTop50Words(corpus):
-    return
+    unique_unigrams_lst=buildVocabulary(corpus)
+    unigrams_count_dict=countUnigrams(corpus)
+    unigrams_probs_lst=buildUnigramProbs(unique_unigrams_lst, unigrams_count_dict, getCorpusLength(corpus))
+    top_words_dict=getTopWords(50, unique_unigrams_lst, unigrams_probs_lst, ignore)
+    barPlot(top_words_dict, "Graph the Top 50 Words")
+
+    return None
 
 
 '''
@@ -386,21 +396,20 @@ def scatterPlot(xs, ys, labels, title):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
-    # test.week1Tests()
-    # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    # test.runWeek1()
-    # test.testCountBigrams()
+    print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
+    test.week1Tests()
+    print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
+    test.runWeek1()
+    test.testCountBigrams()
 
-    ## Uncomment these for Week 2 ##
-    # print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
-    # test.week2Tests()
-    # print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
-    # test.runWeek2()
+    # Uncomment these for Week 2 ##
+    print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
+    test.week2Tests()
+    print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
+    test.runWeek2()
 
-    test.testGenerateTextFromBigrams()
-    ## Uncomment these for Week 3 ##
-"""
+    # test.testGenerateTextFromBigrams()
+    # Uncomment these for Week 3 
+
     print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
     test.runWeek3()
-"""
