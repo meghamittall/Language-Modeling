@@ -188,7 +188,7 @@ Returns: dict mapping strs to floats
 '''
 def getTopWords(count, words, probs, ignoreList):
     top_words_dict={}
-    words_dict ={}                                                                                                     
+    words_dict = {}                                                                                                   
     for i in range(len(words)):
         if words[i] not in ignoreList:
             words_dict[words[i]]=(probs[i])
@@ -196,7 +196,7 @@ def getTopWords(count, words, probs, ignoreList):
         top_words_dict[key]=value
         if len(top_words_dict) == count:
             break
-    # print(top_words_dict)
+    print(top_words_dict)
     return top_words_dict
 
 
@@ -208,7 +208,6 @@ Returns: str
 '''
 from random import choices
 def generateTextFromUnigrams(count, words, probs):
-    # words_list=[]
     sentence=" "
     for x in range(count):
         lst = choices(words, weights=probs)
@@ -278,7 +277,11 @@ Parameters: 2D list of strs
 Returns: None
 '''
 def graphTopStartWords(corpus):
-    return
+    start_words_lst=getStartWords(corpus)
+    start_words_count_dict=countStartWords(corpus)
+    start_words_probs_lst=buildUnigramProbs(start_words_lst, start_words_count_dict, getCorpusLength(corpus))
+    top_start_words_dict=getTopWords(50, start_words_lst, start_words_probs_lst, ignore)
+    barPlot(top_start_words_dict, "Graph the Top Starting Words")
 
 
 '''
@@ -397,14 +400,14 @@ def scatterPlot(xs, ys, labels, title):
 # This code runs the test cases to check your work
 if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
-    test.week1Tests()
+    #test.week1Tests()
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     test.runWeek1()
     test.testCountBigrams()
 
     # Uncomment these for Week 2 ##
     print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
-    test.week2Tests()
+    #test.week2Tests()
     print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
     test.runWeek2()
 
