@@ -133,8 +133,7 @@ Returns: list of floats
 def buildUniformProbs(unigrams):
     uniform_prob_lst=[]
     for i in range(len(unigrams)):
-        unigrams[i]=1/len(unigrams)
-        uniform_prob_lst.append(unigrams[i])
+        uniform_prob_lst.append(1/len(unigrams))
     # print(uniform_prob_lst)
     return uniform_prob_lst
 
