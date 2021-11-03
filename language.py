@@ -353,8 +353,8 @@ Returns: None
 '''
 def graphTopWordsInScatterplot(corpus1, corpus2, numWords, title):
     resulted_dict=setupChartData(corpus1, corpus2, numWords)
-    scatterPlot(xs, ys, labels, title)
-    return
+    scatterPlot(resulted_dict["corpus1Probs"], resulted_dict["corpus2Probs"], resulted_dict["topWords"], title)
+    return None
 
 
 ### WEEK 3 PROVIDED CODE ###
