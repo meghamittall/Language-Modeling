@@ -308,9 +308,31 @@ Parameters: 2D list of strs ; 2D list of strs ; int
 Returns: dict mapping strs to (lists of values)
 '''
 def setupChartData(corpus1, corpus2, topWordCount):
-    return
-
-
+    first_prob_lst=[]
+    second_prob_lst=[]
+    resulted_dict={}
+    words_lst1, words_lst2 = buildVocabulary(corpus1), buildVocabulary(corpus2)
+    count_dict1, count_dict2 = countUnigrams(corpus1), countUnigrams(corpus2)
+    probs_lst1 = buildUnigramProbs(words_lst1, count_dict1, getCorpusLength(corpus1)) 
+    probs_lst2 = buildUnigramProbs(words_lst2, count_dict2, getCorpusLength(corpus2))
+    top_words_dict1=getTopWords(topWordCount, words_lst1, probs_lst1, ignore)
+    top_words_dict2=getTopWords(topWordCount, words_lst2, probs_lst2, ignore)
+    combine_lst=list(top_words_dict1.keys()) + list(top_words_dict2.keys())
+    top_words_lst=list(dict.fromkeys(combine_lst))
+    for i in range(len(top_words_lst)):
+        if top_words_lst[i] in words_lst1:
+            ind = words_lst1.index(top_words_lst[i])
+            first_prob_lst.append(probs_lst1[ind])
+        else:
+            first_prob_lst.append(0)
+        if top_words_lst[i] in words_lst2:
+            ind = words_lst2.index(top_words_lst[i])
+            second_prob_lst.append(probs_lst2[ind])
+    resulted_dict["topWords"]=top_words_lst
+    resulted_dict["corpus1Probs"]=first_prob_lst
+    resulted_dict["corpus2Probs"]=second_prob_lst
+    # print("resulted_dict=", resulted_dict)
+    return resulted_dict
 '''
 graphTopWordsSideBySide(corpus1, name1, corpus2, name2, numWords, title)
 #6 [Hw6]
@@ -318,7 +340,9 @@ Parameters: 2D list of strs ; str ; 2D list of strs ; str ; int ; str
 Returns: None
 '''
 def graphTopWordsSideBySide(corpus1, name1, corpus2, name2, numWords, title):
-    return
+    resulted_dict=setupChartData(corpus1, corpus2, numWords)
+    sideBySideBarPlots(resulted_dict["topWords"], resulted_dict["corpus1Probs"], resulted_dict["corpus2Probs"], name1, name2, title)
+    return None
 
 
 '''
@@ -328,6 +352,8 @@ Parameters: 2D list of strs ; 2D list of strs ; int ; str
 Returns: None
 '''
 def graphTopWordsInScatterplot(corpus1, corpus2, numWords, title):
+    resulted_dict=setupChartData(corpus1, corpus2, numWords)
+    scatterPlot(xs, ys, labels, title)
     return
 
 
@@ -410,7 +436,7 @@ if __name__ == "__main__":
     #test.week1Tests()
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     test.runWeek1()
-    test.testCountBigrams()
+    # test.testCountBigrams()
 
     # Uncomment these for Week 2 ##
     print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
@@ -420,6 +446,6 @@ if __name__ == "__main__":
 
     # test.testGenerateTextFromBigrams()
     # Uncomment these for Week 3 
-
+    test.testSetupChartData()
     print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
     test.runWeek3()
